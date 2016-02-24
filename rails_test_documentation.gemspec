@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.files       = Dir.glob('lib/**/*') + ["README.md"]
   s.homepage    = 'https://github.com/Maysora/rails_test_documentation'
   s.license     = 'MIT'
-  s.add_dependency("rails", "~> 5.0.0")
+  s.add_dependency("rails", ">= 4.2.0", "< 5.1")
 end
