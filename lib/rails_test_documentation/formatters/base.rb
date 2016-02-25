@@ -19,7 +19,7 @@ module RailsTestDocumentation
 
       def sort_tests tests
         tests.sort do |a,b|
-          test_sort_key(a[0]) <=> test_sort_key(b[0])
+          "#{test_sort_key(a[0])}_#{a}" <=> "#{test_sort_key(b[0])}_b"
         end
       end
 

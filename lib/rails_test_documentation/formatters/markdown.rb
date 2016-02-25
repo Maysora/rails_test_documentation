@@ -40,6 +40,7 @@ module RailsTestDocumentation
               self.content += "#{'#' * 3} #{status}\n\n"
               data_arr.each_with_index do |data, i|
                 self.content += "---\n\n" unless i.zero?
+                self.content += "#{'#' * 4} Sample #{i+1}\n\n"
                 self.content += "```\n#{data[:description].delete(:text)}\n```\n\n---\n\n"
                 data[:description].each do |k,v|
                   self.content += "#{'#' * 5} #{k.to_s.titleize}\n\n"
@@ -47,11 +48,11 @@ module RailsTestDocumentation
                 end
                 self.content += "__URL :__ #{data[:request_method]} `#{data[:request_path]}`\n\n"
                 if data[:request_params].present?
-                  self.content += "#{'#' * 4} Params\n\n"
+                  self.content += "#{'#' * 5} Params\n\n"
                   self.content += "```json\n#{JSON.pretty_generate(Rack::Utils.parse_nested_query(data[:request_params].to_query))}\n```\n\n"
                 end
                 if data[:response_body].present?
-                  self.content += "#{'#' * 4} Response\n\n"
+                  self.content += "#{'#' * 5} Response\n\n"
                   response_format = response_format(data[:response_content_type])
                   data[:response_body] = JSON.pretty_generate(JSON.parse(data[:response_body])) if response_format == 'json'
                   self.content += "```#{response_format}\n#{data[:response_body]}\n```\n\n"
