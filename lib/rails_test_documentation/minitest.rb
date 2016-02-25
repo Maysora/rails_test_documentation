@@ -10,7 +10,9 @@ module Minitest
     end
 
     def record(result)
-      return if !result.is_a?(ActionController::TestCase) || !result.request.env['action_dispatch.request.path_parameters']
+      return if !result.is_a?(ActionController::TestCase) ||
+                  !result.request.env['action_dispatch.request.path_parameters'] ||
+                  no_documentation?(result)
 
       klass_name = result.class.name.gsub(/ControllerTest$/, '').titleize
       dhash[klass_name] ||= {}
@@ -65,6 +67,15 @@ module Minitest
         { text: description }
       else
         description
+      end
+    end
+
+    def no_documentation?(result)
+      no_doc = result.instance_variable_get(:@test_no_documentation)
+      if no_doc.is_a? Array
+        no_doc.include?(format)
+      else
+        !!no_doc
       end
     end
   end
