@@ -10,7 +10,8 @@ module Minitest
     end
 
     def record(result)
-      return if !result.is_a?(ActionController::TestCase) ||
+      return if result.failure ||
+                  !result.is_a?(ActionController::TestCase) ||
                   !result.request.env['action_dispatch.request.path_parameters'] ||
                   no_documentation?(result)
 
