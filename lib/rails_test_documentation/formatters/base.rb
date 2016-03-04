@@ -23,6 +23,12 @@ module RailsTestDocumentation
         end
       end
 
+      def sort_samples samples
+        samples.sort do |a,b|
+          a[:description][:text] <=> b[:description][:text]
+        end
+      end
+
       def test_sort_key key
         %w(GET POST PUT PATCH DELETE).index(key.split(' ', 2)[0]) || key
       end

@@ -38,7 +38,7 @@ module RailsTestDocumentation
             arr.group_by{|a| a[:response_status]}.sort.each do |status, data_arr|
               self.menu += "    * [#{status}](\##{format_url(status)})\n"
               self.content += "#{'#' * 3} #{status}\n\n"
-              data_arr.each_with_index do |data, i|
+              sort_samples(data_arr).each_with_index do |data, i|
                 self.content += "---\n\n" unless i.zero?
                 self.content += "#{'#' * 4} Sample #{i+1}\n\n"
                 self.content += "```\n#{data[:description].delete(:text)}\n```\n\n---\n\n"
