@@ -13,10 +13,18 @@ module RailsTestDocumentation
         '.md'
       end
 
+      def output_name
+        if ENV['TEST_DOCUMENTATION_NAME'].present?
+          "#{ENV['TEST_DOCUMENTATION_NAME'].sub(/\..+$/, '')}#{ext}"
+        else
+          'STDOUT'
+        end
+      end
+
       def print
         urls = {}
         self.output = ENV['TEST_DOCUMENTATION_NAME'].present? ?
-                        File.open("#{ENV['TEST_DOCUMENTATION_NAME']}#{ext}", 'wt') :
+                        File.open(output_name, 'wt') :
                         STDOUT
 
         dhash.sort.each do |class_name, result|
