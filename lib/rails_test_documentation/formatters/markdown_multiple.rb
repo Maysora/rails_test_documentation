@@ -25,6 +25,7 @@ module RailsTestDocumentation
 
       def print
         main_output = File.open(output_name, 'wt')
+        FileUtils.remove_dir dir_name if File.directory?(dir_name)
         FileUtils.mkdir_p dir_name
 
         main_output.puts "Generated using `rails test --documentation mdm`"
