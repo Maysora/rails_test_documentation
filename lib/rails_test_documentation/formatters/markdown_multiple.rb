@@ -101,8 +101,7 @@ module RailsTestDocumentation
       private
 
       def format_output_name name
-        name = File.basename(name).downcase
-        name = name.gsub(/(:|&|\/|,|\(|\))/,"_")
+        name = name.downcase.gsub(/(:|&|\/|,|\(|\))/,"_")
         name = "_#{name}" if name =~ /\A\.+\z/
         "#{name}#{ext}"
       end
