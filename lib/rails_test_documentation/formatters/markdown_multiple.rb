@@ -45,7 +45,11 @@ module RailsTestDocumentation
 
             class_description = result.delete(:description)
             if class_description.present?
-              class_output.puts "```\n#{class_description.delete(:text)}\n```\n\n---\n" if class_description[:text].present?
+              text = class_description.delete(:text)
+              if text.present?
+                main_output.puts "  * #{text}"
+                class_output.puts "```\n#{text}\n```\n\n---\n"
+              end
               class_description.each do |k,v|
                 class_output.puts "#{'#' * 5} #{k.to_s.titleize}\n"
                 class_output.puts print_description(v)
@@ -81,7 +85,7 @@ module RailsTestDocumentation
                     content += "```#{response_format}\n#{data[:response_body]}\n```\n\n"
                   end
                 end
-                content += "Go to: [class](#tests) | [home](output_name)\n\n"
+                content += "Go to: [class](#tests) | [home](../#{output_name})\n\n"
               end
             end
             class_output.puts
