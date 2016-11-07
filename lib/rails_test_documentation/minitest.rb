@@ -42,12 +42,15 @@ module Minitest
       return unless passed?
 
       formatter = nil
-      if format == 'md'
+      case format
+      when 'md'
         formatter = ::RailsTestDocumentation::Formatter::Markdown.new dhash
-      # elsif format == 'html'
+      # when 'html'
       #   formatter = ::RailsTestDocumentation::Formatter::HTML.new dhash
-      else
-        # TODO: text format
+      when 'mdm'
+        formatter = ::RailsTestDocumentation::Formatter::MarkdownMultiple.new dhash
+      # else
+      #   formatter = ::RailsTestDocumentation::Formatter::Text.new dhash
       end
       return unless formatter
       puts "\nPrinting #{format} format to #{formatter.output_name}"
