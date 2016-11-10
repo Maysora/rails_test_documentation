@@ -1,3 +1,5 @@
+require_relative 'base.rb'
+
 module RailsTestDocumentation
   module Formatter
     class Markdown < Base
